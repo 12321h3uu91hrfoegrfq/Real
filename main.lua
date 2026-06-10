@@ -31,7 +31,7 @@ local playersService = cloneref(game:GetService('Players'))
 local function downloadFile(path, func)
 	if not isfile(path) then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('vape/profiles/commit.txt')..'/'..select(1, path:gsub('vape/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('Real/profiles/commit.txt')..'/'..select(1, path:gsub('Real/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -61,9 +61,9 @@ local function finishLoading()
 			local teleportScript = [[
 				shared.vapereload = true
 				if shared.VapeDeveloper then
-					loadstring(readfile('vape/loader.lua'), 'loader')()
+					loadstring(readfile('Real/loader.lua'), 'loader')()
 				else
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('vape/profiles/commit.txt')..'/loader.lua', true), 'loader')()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('Real/profiles/commit.txt')..'/loader.lua', true), 'loader')()
 				end
 			]]
 			if shared.VapeDeveloper then
@@ -85,28 +85,28 @@ local function finishLoading()
 	end
 end
 
-if not isfile('vape/profiles/gui.txt') then
-	writefile('vape/profiles/gui.txt', 'new')
+if not isfile('Real/profiles/gui.txt') then
+	writefile('Real/profiles/gui.txt', 'new')
 end
-local gui = readfile('vape/profiles/gui.txt')
+local gui = readfile('Real/profiles/gui.txt')
 
-if not isfolder('vape/assets/'..gui) then
-	makefolder('vape/assets/'..gui)
+if not isfolder('Real/assets/'..gui) then
+	makefolder('Real/assets/'..gui)
 end
-vape = loadstring(downloadFile('vape/guis/'..gui..'.lua'), 'gui')()
+vape = loadstring(downloadFile('Real/guis/'..gui..'.lua'), 'gui')()
 shared.vape = vape
 
 if not shared.VapeIndependent then
-	loadstring(downloadFile('vape/games/universal.lua'), 'universal')()
-	if isfile('vape/games/'..game.PlaceId..'.lua') then
-		loadstring(readfile('vape/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
+	loadstring(downloadFile('Real/games/universal.lua'), 'universal')()
+	if isfile('Real/games/'..game.PlaceId..'.lua') then
+		loadstring(readfile('Real/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
 	else
 		if not shared.VapeDeveloper then
 			local suc, res = pcall(function()
-				return game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('vape/profiles/commit.txt')..'/games/'..game.PlaceId..'.lua', true)
+				return game:HttpGet('https://raw.githubusercontent.com/12321h3uu91hrfoegrfq/Real/'..readfile('Real/profiles/commit.txt')..'/games/'..game.PlaceId..'.lua', true)
 			end)
 			if suc and res ~= '404: Not Found' then
-				loadstring(downloadFile('vape/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
+				loadstring(downloadFile('Real/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
 			end
 		end
 	end
